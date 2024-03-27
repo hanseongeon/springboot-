@@ -165,7 +165,15 @@ public class TestController {
     public String loginView2(){
         return "login";
     }
+
+    @RequestMapping("/html-test")
+    public String htmlTest(){
+        return "test";
+    }
+
 }
+
+
 
 @Getter
 @Setter
