@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.yaml.snakeyaml.tokens.Token;
 
 import java.util.ArrayList;
 import java.util.StringJoiner;
@@ -129,7 +130,41 @@ public class TestController {
         return age+"살 "+name+"입니다";
     }
 
+    @RequestMapping("/login")
+    @ResponseBody
+    public String test12(@RequestParam("ID") String id,@RequestParam("PW") String pw){
+        String Id = "hong";
+        String Pw = "1234";
+        if(Id.equals(id)){
+            if(Pw.equals(pw)){
+                return "로그인 성공";
+            }else{
+                return "로그인 실패";
+            }
+        }else{
+            return "로그인 실패";
+        }
+    }
 
+    @RequestMapping("/loginView")
+    @ResponseBody
+    public String loginView(){
+        return """
+                <form action="http://localhost:8088/test12">
+                  <input type="text" name = "ID">
+                  <input type="password" name = "PW">
+                  <input type="submit">
+                </form>
+                                
+                """;
+    }
+
+    @RequestMapping("/loginView2")
+    // @ResponseBody 를 붙이지 않으면 template으로 view를 대체한다는 의미
+    // 타임리프(thymeleaf) 라이브러리 추가해야함.
+    public String loginView2(){
+        return "login";
+    }
 }
 
 @Getter
