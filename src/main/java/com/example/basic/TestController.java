@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
@@ -86,6 +87,46 @@ public class TestController {
 //        sb.append("2 X 4 = 8<br>");
 
         return sb.toString();
+    }
+
+    @RequestMapping("/test7")
+    @ResponseBody
+    public String test7(@RequestParam("num1") int num1, @RequestParam("num2") int num2) {
+        int result = num1 + num2;
+
+        return "result : " + result;
+    }
+
+    @RequestMapping("/test8")
+    @ResponseBody
+    public String test8(@RequestParam("name") String name){
+        return name + "님 반갑습니다.";
+    }
+
+    @RequestMapping("/test9")
+    @ResponseBody
+    public String test9(@RequestParam("dan") int dan){
+        StringBuilder sb = new StringBuilder();
+        for(int i = 2; i <=9; i++){
+            sb.append(dan+" X "+i+" = "+dan*i+"<br>");
+        }
+        return sb.toString();
+    }
+
+    @RequestMapping("/test10")
+    @ResponseBody
+    public String test10(@RequestParam("dan") int dan, @RequestParam("limit") int limit){
+        StringBuilder sb = new StringBuilder();
+        for(int i = 2; i <= limit; i++){
+            sb.append(dan+" X "+i+" = "+dan*i+"<br>");
+        }
+        return sb.toString();
+    }
+
+    @RequestMapping("/test11")
+    @ResponseBody
+    public String test11(@RequestParam("name") String name,@RequestParam("age") int age){
+        return age+"살 "+name+"입니다";
     }
 
 
