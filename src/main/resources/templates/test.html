@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>html 텍스트 반복</h1>
-
+<br>
 <!--  변수사용  -->
 <!-- 변수, 반복문, 조건문 -->
 <div th:with="name='김영희'">
@@ -16,5 +16,61 @@
     <div>안녕하세요 <span th:text="${name}"></span>님</div>
     <div>안녕하세요 <span th:text="${name}"></span>님</div>
 </div>
+<br>
+<div th:with="name='가나다',age=20">
+    <div><span th:text="'안녕하세요 저는 '+${age}+'살 '+${name}+'입니다'"></span></div>
+    <div><span th:text="'안녕하세요 저는 '+${age}+'살 '+${name}+'입니다'"></span></div>
+    <div><span th:text="'안녕하세요 저는 '+${age}+'살 '+${name}+'입니다'"></span></div>
+</div>
+<br>
+<!-- 조건문 사용 -->
+<div th:with="num=10">
+    <div th:if="${num % 2 !=0 }">홀수</div>
+    <div th:unless="${num % 2 !=0 }">짝수</div>
+</div>
+<br>
+<!-- 직접 인덱스 만들어서 사용하는 반복문 -->
+<div>
+    <div th:each="i : ${#numbers.sequence(0,4)}" th:text="${i}"></div>
+</div>
+<br>
+<div th:with="num1=15,num2=20">
+    <div th:if="${num1>num2}" th:text="${num1-num2}"></div>
+    <div th:unless="${num1>num2}" th:text="${num2-num1}"></div>
+</div>
+<br>
+<div th:with="age=78">
+    <div th:if="${age<=19||age>=60}">할인대상입니다.</div>
+    <div th:unless="${age<=19||age>=60}">할인대상이 아닙니다..</div>
+</div>
+<br>
+<div th:with="car=175,tunnel1=180,tunnel2=182,tunnel3=172">
+    <div th:if="${car<tunnel1}">
+        <div th:if="${car<tunnel2}">
+            <div th:if="${car<tunnel3}" th:text="PASS"></div>
+            <div th:unless="${car<tunnel3}">Crush</div>
+        </div>
+        <div th:unless="${car<tunnel2}">Crush</div>
+    </div>
+    <div th:unless="${car<tunnel1}">Crush</div>
+</div>
+<br>
+<div th:each="i:${#numbers.sequence(1,100)}" th:text="${i}"></div>
+<br>
+<div th:each="i:${#numbers.sequence(1,100)}" th:if="${i % 2 == 0}" th:text="${i}"></div>
+<br>
+<div th:each="i:${#numbers.sequence(1,100)}" th:unless="${i % 2 == 0}" th:text="${i}"></div>
+<br>
+<div th:with="goal=0"></div>
+<div th:with="score=0" th:each="i:${#numbers.sequence(74,90,5)}">
+    <div th:if="${i<90}">
+        <div th:with="score=${score + 1}">
+            <div th:with="goal = score"></div>
+        </div>
+    </div>
+</div>
+<div th:text="${goal}"></div>
+
+
 </body>
 </html>
